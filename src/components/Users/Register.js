@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Container, FormControl, FormGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import Header from "../Header/Header";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("user-details")) {
+      navigate("/products-add");
+    }
+  }, []);
 
   let user = { name, email, password };
 
@@ -30,52 +37,55 @@ const Register = () => {
   };
 
   return (
-    <Container className="card-body mt-5 col-md-9">
-      <form className="card  mt-3">
-        <h4 className="card-title text-center mt-2">Register</h4>
-        <FormGroup className="card-body">
-          <div className="col col-md-6 ml-auto mr-auto">
-            <label className="col-form-label">User Name</label>
-            <FormControl
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              type="text"
-              className="form-control"
-            />
+    <>
+      <Header />
+      <Container className="card-body mt-5 col-md-9">
+        <form className="card  mt-3">
+          <h4 className="card-title text-center mt-2">Register</h4>
+          <FormGroup className="card-body">
+            <div className="col col-md-6 ml-auto mr-auto">
+              <label className="col-form-label">User Name</label>
+              <FormControl
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                type="text"
+                className="form-control"
+              />
+            </div>
+            <div className="col col-md-6 ml-auto mr-auto">
+              <label className="col-form-label">Email</label>
+              <FormControl
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                className="form-control"
+              />
+            </div>
+            <div className="col col-md-6 ml-auto mr-auto">
+              <label className="col-form-label">Password</label>
+              <FormControl
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                type="password"
+                className="form-control"
+              />
+            </div>
+          </FormGroup>
+          <div className=" col-md-6 ml-auto mr-auto">
+            <div className="col">
+              <Button
+                onClick={btnHandle}
+                className="col mb-5"
+                variant="info"
+                type="submit"
+              >
+                Register
+              </Button>
+            </div>
           </div>
-          <div className="col col-md-6 ml-auto mr-auto">
-            <label className="col-form-label">Email</label>
-            <FormControl
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              className="form-control"
-            />
-          </div>
-          <div className="col col-md-6 ml-auto mr-auto">
-            <label className="col-form-label">Password</label>
-            <FormControl
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              type="password"
-              className="form-control"
-            />
-          </div>
-        </FormGroup>
-        <div className=" col-md-6 ml-auto mr-auto">
-          <div className="col">
-            <Button
-              onClick={btnHandle}
-              className="col mb-5"
-              variant="info"
-              type="submit"
-            >
-              Register
-            </Button>
-          </div>
-        </div>
-      </form>
-    </Container>
+        </form>
+      </Container>
+    </>
   );
 };
 
