@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("user-details")) {
+      navigate("/products-add");
+    }
+  }, []);
+
   return (
     <div>
       <Header />

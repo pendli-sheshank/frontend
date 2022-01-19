@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <div>
       <Navbar bg="dark" variant="dark">
-        <Navbar.Brand href="/">Ecomm</Navbar.Brand>
+        <Navbar.Brand>Ecomm</Navbar.Brand>
         <Nav className="ml-auto mr-3 ">
           {localStorage.getItem("user-details") ? (
             <>
