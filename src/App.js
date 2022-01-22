@@ -14,11 +14,11 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route
-            path="/products-add"
+            path="/add"
             element={<Protected Component={AddProducts} />}
           ></Route>
           <Route
-            path="/products-update"
+            path="/update"
             element={<Protected Component={UpdateProducts} />}
           ></Route>
         </Routes>

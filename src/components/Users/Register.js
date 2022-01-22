@@ -11,9 +11,9 @@ const Register = () => {
 
   useEffect(() => {
     if (localStorage.getItem("user-details")) {
-      navigate("/products-add");
+      navigate("/login");
     }
-  }, []);
+  });
 
   let user = { name, email, password };
 
@@ -33,7 +33,7 @@ const Register = () => {
     result = await result.json();
     console.log("From DB", result);
     localStorage.setItem("user-details", JSON.stringify(result));
-    navigate("/products-add");
+    navigate("/login");
   };
 
   return (
