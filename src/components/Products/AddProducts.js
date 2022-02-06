@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { Button, FormControl, FormGroup } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 
 const AddProducts = () => {
@@ -7,6 +9,8 @@ const AddProducts = () => {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [file, setFile] = useState("");
+
+  const navigate = useNavigate();
 
   const addProduct = async (e) => {
     e.preventDefault();
@@ -20,14 +24,15 @@ const AddProducts = () => {
       method: "POST",
       body: formData,
     });
-    console.log("data", formData);
+    localStorage.setItem("product", JSON.stringify(result));
+    navigate("/");
   };
 
   return (
     <div>
       <Header />
 
-      <form method="post" enctype="multipart/form-data" className="card  m-3  ">
+      <form method="post" className="card  m-3  ">
         <h4 className="card-title text-center mt-2">Add Product</h4>
         <FormGroup className="card-body">
           <div className="col col-md-6 ml-auto mr-auto w-70">

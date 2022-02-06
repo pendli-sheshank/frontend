@@ -5,6 +5,7 @@ import AddProducts from "./components/Products/AddProducts";
 import UpdateProducts from "./components/Products/UpdateProducts";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Protected from "./components/Protected/Protected";
+import ProductsList from "./components/Products/ProductsList";
 
 function App() {
   return (
@@ -18,8 +19,12 @@ function App() {
             element={<Protected Component={AddProducts} />}
           ></Route>
           <Route
-            path="/update"
+            path="/update/:id"
             element={<Protected Component={UpdateProducts} />}
+          ></Route>
+          <Route
+            path="/"
+            element={<Protected Component={ProductsList} />}
           ></Route>
         </Routes>
       </div>

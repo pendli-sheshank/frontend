@@ -6,12 +6,13 @@ import Header from "../Header/Header";
 const Login = () => {
   const navigate = useNavigate();
 
-  const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
+  const [email, setemail] = useState("sheshankreddy@gmail.com");
+  const [password, setpassword] = useState("sheshank");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (localStorage.getItem("user-details")) {
-      navigate("/add");
+      navigate("/");
     }
   });
 
@@ -29,8 +30,12 @@ const Login = () => {
     });
     result = await result.json();
     console.log("From Users", result);
-    localStorage.setItem("user-details", JSON.stringify(result));
-    navigate("/add");
+    if (result.error === "Email or Password Incorrect") {
+      setError(result.error);
+    } else {
+      localStorage.setItem("user-details", JSON.stringify(result));
+      navigate("/");
+    }
   };
 
   return (
@@ -38,11 +43,15 @@ const Login = () => {
       <Header />
       <form className="card  m-3  ">
         <h4 className="card-title text-center mt-2">Login</h4>
+
         <FormGroup className="card-body">
           <div className="col col-md-6 ml-auto mr-auto w-70">
+            <p className="text-danger"> {error}</p>
+
             <label className="col-form-label">Email</label>
             <FormControl
               type="email"
+              defaultValue={email}
               onChange={(e) => setemail(e.target.value)}
               className="form-control"
             />
@@ -51,11 +60,13 @@ const Login = () => {
             <label className="col-form-label">Password</label>
             <FormControl
               type="password"
+              defaultValue={password}
               onChange={(e) => setpassword(e.target.value)}
               className="form-control"
             />
           </div>
         </FormGroup>
+
         <div className=" col-md-6 ml-auto mr-auto w-70">
           <div className="col">
             <Button
