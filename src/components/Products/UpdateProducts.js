@@ -13,13 +13,17 @@ const UpdateProducts = (props) => {
   const navigate = useNavigate();
 
   const { id } = useParams();
-  console.log(id);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     let result = await fetch("http://localhost:8000/api/product/" + id);
     result = await result.json();
+    console.log(result);
     setData(result);
+    setName(result.name);
+    setPrice(result.price);
+    setPrice(result.description);
+    setDescription(result.file);
   }, [id]);
 
   const updateProduct = async (e) => {
@@ -30,10 +34,13 @@ const UpdateProducts = (props) => {
     formData.append("description", description);
     formData.append("name", name);
 
-    let result = await fetch("http://localhost:8000/api/updateproduct/" + id, {
-      method: "PUT",
-      body: formData,
-    });
+    let result = await fetch(
+      "http://localhost:8000/api/updateproduct/" + id + "?_method=PUT",
+      {
+        method: "post",
+        body: formData,
+      }
+    );
     localStorage.setItem("product", JSON.stringify(result));
     navigate("/");
   };
@@ -42,7 +49,7 @@ const UpdateProducts = (props) => {
     <div>
       <Header />
 
-      <form method="put" className="card  m-3  ">
+      <form className="card  m-3  ">
         <h4 className="card-title text-center mt-2">Update Product</h4>
         <FormGroup className="card-body">
           <div className="col col-md-6 ml-auto mr-auto w-70">

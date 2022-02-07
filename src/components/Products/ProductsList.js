@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, Col, Row } from "react-bootstrap";
+import { Button, Card, Col, Row } from "react-bootstrap";
 import Header from "../Header/Header";
 import "../../App.css";
 import { Link } from "react-router-dom";
@@ -35,25 +35,31 @@ const ProductsList = () => {
         <Row className="mt-5">
           {data.map((product, id) => {
             return (
-              <Col key={id} className="col-sm-12 col-md-3 ">
-                <Card className="m-1 cardheight ">
+              <Col
+                key={id}
+                className="col-sm-12 col-md-3 d-flex align-items-stretch "
+              >
+                <Card className="m-1 shadow-sm p-3 mb-5 bg-white rounded">
                   <Card.Body className="row ">
                     <div className="col">
-                      <h4>{product.name}</h4>
+                      <Card.Title>{product.name}</Card.Title>
 
-                      <p>{product.description}</p>
-                      <h5> Rs: {product.price} </h5>
-                      <span
+                      <Card.Text>{product.description}</Card.Text>
+                      <Card.Title>
+                        <span class="material-icons">currency_rupee</span>{" "}
+                        {product.price}
+                      </Card.Title>
+                      <Button
                         onClick={() => onDelete(product.id)}
                         className="btn-sm btn-danger mr-1"
                       >
                         Delete
-                      </span>
-                      <span className="btn-sm btn-info ml-1">
+                      </Button>
+                      <Button className="btn-sm btn-info ml-1">
                         <Link className="link" to={"update/" + product.id}>
                           Update
                         </Link>
-                      </span>
+                      </Button>
                     </div>
                     <div className="col">
                       <img

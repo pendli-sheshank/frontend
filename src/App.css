@@ -12,9 +12,7 @@
   text-decoration: none;
   color: aliceblue;
 }
-.cardheight {
-  min-height: 250px;
-}
+
 span {
   cursor: pointer;
 }

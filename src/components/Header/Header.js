@@ -1,5 +1,12 @@
 import React from "react";
-import { Nav, Navbar, NavDropdown } from "react-bootstrap";
+import {
+  Col,
+  FormControl,
+  Nav,
+  Navbar,
+  NavDropdown,
+  Row,
+} from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import "../../App.css";
 
@@ -20,12 +27,24 @@ const Header = () => {
             NM Designs
           </Link>
         </Navbar.Brand>
-        <Nav>
+        <Nav className="col">
           {localStorage.getItem("user-details") ? (
             <>
-              <Link className="pl-3 link" to="/add">
-                Add Products
-              </Link>
+              <Row>
+                <Link
+                  className="pl-3 d-flex align-items-center  link"
+                  to="/add"
+                >
+                  Add Products
+                </Link>
+              </Row>
+              <Row>
+                <FormControl
+                  type="search"
+                  placeholder="search"
+                  className="ml-5 form-control"
+                />
+              </Row>
             </>
           ) : (
             <>
@@ -43,7 +62,7 @@ const Header = () => {
           )}
         </Nav>
         {localStorage.getItem("user-details") ? (
-          <Nav className="ml-auto">
+          <Nav className="ml-auto mr-5 pr-5">
             <NavDropdown title={users && users.name}>
               <NavDropdown.Item className="mr-auto" onClick={onLogout}>
                 Logout
