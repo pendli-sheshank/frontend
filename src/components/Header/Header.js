@@ -1,16 +1,11 @@
 import React from "react";
-import {
-  Col,
-  FormControl,
-  Nav,
-  Navbar,
-  NavDropdown,
-  Row,
-} from "react-bootstrap";
+import { useState } from "react";
+import { FormControl, Nav, Navbar, NavDropdown, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import "../../App.css";
 
 const Header = () => {
+  const [search, setSearch] = useState("");
   const navigate = useNavigate();
   const users = JSON.parse(localStorage.getItem("user-details"));
 
@@ -38,13 +33,6 @@ const Header = () => {
                   Add Products
                 </Link>
               </Row>
-              <Row>
-                <FormControl
-                  type="search"
-                  placeholder="search"
-                  className="ml-5 form-control"
-                />
-              </Row>
             </>
           ) : (
             <>
@@ -61,6 +49,14 @@ const Header = () => {
             </>
           )}
         </Nav>
+        <Row>
+          <FormControl
+            type="search"
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="search"
+            className="mr-5 form-control"
+          />
+        </Row>
         {localStorage.getItem("user-details") ? (
           <Nav className="ml-auto mr-5 pr-5">
             <NavDropdown title={users && users.name}>

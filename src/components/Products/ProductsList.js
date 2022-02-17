@@ -4,7 +4,7 @@ import Header from "../Header/Header";
 import "../../App.css";
 import { Link } from "react-router-dom";
 
-const ProductsList = () => {
+const ProductsList = (search) => {
   const [data, setData] = useState([]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -30,7 +30,7 @@ const ProductsList = () => {
 
   return (
     <div>
-      <Header />
+      <Header search={search} />
       <div className="m-2 p-2">
         <Row className="mt-5">
           {data.map((product, id) => {
